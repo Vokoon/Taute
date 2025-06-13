@@ -61,7 +61,7 @@ if not os.path.exists(app.config['AVATAR_FOLDER']):
 
 print("⚙️ Загрузка модели...")
 try:
-    model = musicgen.MusicGen.get_pretrained('facebook/musicgen-medium')
+    model = musicgen.MusicGen.get_pretrained('facebook/musicgen-small')
     model.set_generation_params(
         duration=15,
         use_sampling=True,
