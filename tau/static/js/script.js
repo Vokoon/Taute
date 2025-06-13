@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const audio = new Audio();
     let currentTrack = null;
     let isPlaying = false;
+    let currentLang = 'ru';
 
     durationSlider.addEventListener('input', function() {
         durationValue.textContent = this.value;
@@ -83,20 +84,27 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    function refreshHints() {
-        fetch('/get-hints')
-            .then(response => response.json())
-            .then(data => {
-                hintsContainer.innerHTML = '';
-                data.hints.forEach(hint => {
-                    const hintElement = document.createElement('div');
-                    hintElement.className = 'hint';
-                    hintElement.textContent = hint;
-                    hintElement.onclick = () => useHint(hint);
-                    hintsContainer.appendChild(hintElement);
-                });
+  function refreshHints() {
+    fetch(`/get-hints?lang=${currentLang}`)
+        .then(response => response.json())
+        .then(data => {
+            hintsContainer.innerHTML = '';
+            data.hints.forEach(hint => {
+                const hintElement = document.createElement('div');
+                hintElement.className = 'hint';
+                hintElement.textContent = hint;
+                hintElement.onclick = () => useHint(hint);
+                hintsContainer.appendChild(hintElement);
             });
-    }
+        });
+}
+
+// Добавим обработчик для кнопки переключения языка
+document.getElementById('lang-toggle').addEventListener('click', function() {
+    currentLang = currentLang === 'ru' ? 'en' : 'ru';
+    this.textContent = currentLang === 'ru' ? 'EN' : 'RU';
+    refreshHints();
+});
 
     window.useHint = function(hint) {
         promptInput.value = hint;

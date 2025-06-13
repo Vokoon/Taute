@@ -467,3 +467,23 @@ button:disabled {
         width: 100%;
     }
 }
+
+
+
+#lang-toggle {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    margin-right: 10px;
+    color: var(--text-color);
+}
+
+#lang-toggle:hover {
+    background-color: rgba(110, 69, 226, 0.1);
+}
+
+.hints-header div {
+    display: flex;
+    align-items: center;
+}

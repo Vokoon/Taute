@@ -61,7 +61,7 @@ if not os.path.exists(app.config['AVATAR_FOLDER']):
 
 print("⚙️ Загрузка модели...")
 try:
-    model = musicgen.MusicGen.get_pretrained('facebook/musicgen-small')
+    model = musicgen.MusicGen.get_pretrained('facebook/musicgen-medium')
     model.set_generation_params(
         duration=15,
         use_sampling=True,
@@ -84,11 +84,19 @@ if not os.path.exists(prompts_file):
 with open(prompts_file, "r") as f:
     prompts = [line.strip() for line in f if line.strip()]
 
-hint_sets = [
-    ["меланхоличный джаз", "энергичный рок", "спокойная фортепианная музыка", "космический синтвейв", "грустная гитарная баллада"],
-    ["весёлая поп-музыка", "мрачный индастриал", "ретро фанк", "эпическая оркестровая тема", "лёгкий лоу-фай бит"],
-    ["техно с ударными", "классическая соната", "дрим-поп атмосфера", "хип-хоп инструментал", "электро свинг"]
-]
+# В app.py заменим hint_sets на:
+hint_sets = {
+    'ru': [
+        ["меланхоличный джаз", "энергичный рок", "спокойная фортепианная музыка", "космический синтвейв", "грустная гитарная баллада"],
+        ["весёлая поп-музыка", "мрачный индастриал", "ретро фанк", "эпическая оркестровая тема", "лёгкий лоу-фай бит"],
+        ["техно с ударными", "классическая соната", "дрим-поп атмосфера", "хип-хоп инструментал", "электро свинг"]
+    ],
+    'en': [
+        ["melancholic jazz", "energetic rock", "calm piano music", "space synthwave", "sad guitar ballad"],
+        ["happy pop music", "dark industrial", "retro funk", "epic orchestral theme", "light lo-fi beat"],
+        ["techno with drums", "classical sonata", "dream-pop atmosphere", "hip-hop instrumental", "electro swing"]
+    ]
+}
 
 @app.route('/api/check-auth')
 def check_auth():
@@ -169,7 +177,7 @@ def logout():
 
 @app.route('/')
 def index():
-    return render_template('index.html', hints=random.choice(hint_sets))
+    return render_template('index.html', hints=random.choice(hint_sets['ru']))
 
 @app.route('/generate', methods=['POST'])
 @login_required
@@ -207,7 +215,8 @@ def serve_audio(filename):
 
 @app.route('/get-hints')
 def get_hints():
-    return jsonify({'hints': random.choice(hint_sets)})
+    lang = request.args.get('lang', 'ru')
+    return jsonify({'hints': random.choice(hint_sets[lang])})
 
 @app.route('/get-tracks')
 @login_required
