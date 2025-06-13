@@ -40,7 +40,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-https://github.com/Vokoon/Taute.git
+git clone https://github.com/Vokoon/Taute.git
 ```
 
 2. Создайте и активируйте виртуальное окружение (рекомендуется):
