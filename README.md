@@ -40,8 +40,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-[git clone https://github.com/ваш-username/TAU-music-generator.git](https://github.com/Vokoon/Taute.git)
-cd TAU-music-generator
+https://github.com/Vokoon/Taute.git
 ```
 
 2. Создайте и активируйте виртуальное окружение (рекомендуется):
