@@ -40,7 +40,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/ваш-username/TAU-music-generator.git
+[git clone https://github.com/ваш-username/TAU-music-generator.git](https://github.com/Vokoon/Taute.git)
 cd TAU-music-generator
 ```
 
@@ -178,7 +178,8 @@ server {
 
 ## Автор
 
-[Ваше имя] - [ваш email]
+Сеченов Мансур Денисович
+Арутюнян Роберт Арташович
 
 ## Благодарности
 
