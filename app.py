@@ -74,7 +74,7 @@ print("⚙️ Загрузка модели...")
 try:
     model = musicgen.MusicGen.get_pretrained('facebook/musicgen-small')
     model.set_generation_params(
-        duration=15,
+        duration=10,
         use_sampling=True,
         top_k=250,
         temperature=1.0,
